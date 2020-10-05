@@ -5,12 +5,56 @@
   - name: user
     using:
       foreign_key_constraint_on: user_id
-- table:
-    schema: public
-    name: roles
-- table:
-    schema: public
-    name: user_roles
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+      - answer
+      - id
+      - question
+      backend_only: false
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - answer
+      - question
+      filter: {}
+  - role: user
+    permission:
+      columns:
+      - answer
+      - question
+      - id
+      - user_id
+      filter: {}
+  - role: visitor
+    permission:
+      columns:
+      - id
+      - question
+      - answer
+      - user_id
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - answer
+      - question
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: {}
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: users
