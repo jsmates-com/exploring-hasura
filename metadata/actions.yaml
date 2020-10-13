@@ -1,6 +1,23 @@
-actions: []
+actions:
+- name: getToken
+  definition:
+    kind: synchronous
+    handler: http://host.docker.internal:4000/login
+- name: hello
+  definition:
+    kind: ""
+    handler: http://host.docker.internal:4000/hello
+- name: login
+  definition:
+    kind: asynchronous
+    handler: http://host.docker.internal:4000/login
 custom_types:
   enums: []
-  input_objects: []
-  objects: []
+  input_objects:
+  - name: SampleInput
+  - name: LoginInput
+  objects:
+  - name: SampleOutput
+  - name: LoginOutput
+  - name: Hello
   scalars: []

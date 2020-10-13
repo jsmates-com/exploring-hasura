@@ -1,2 +1,43 @@
+type Mutation {
+  getToken (
+    input: LoginInput!
+  ): LoginOutput
+}
 
+
+type Query {
+  hello : Hello!
+}
+
+
+type Mutation {
+  login (
+    input: LoginInput!
+  ): LoginOutput
+}
+
+
+
+
+input SampleInput {
+  username : String!
+  password : String!
+}
+
+input LoginInput {
+  username : String!
+  password : String!
+}
+
+type SampleOutput {
+  accessToken : String!
+}
+
+type LoginOutput {
+  accessToken : String!
+}
+
+type Hello {
+  data : String!
+}
 
