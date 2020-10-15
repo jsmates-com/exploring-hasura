@@ -1,18 +1,18 @@
-version: '3.6'
+version: "3.6"
 services:
   postgres:
     image: postgres:12
     restart: always
     volumes:
-    - db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
     image: hasura/graphql-engine:v1.3.2
     ports:
-    - "8080:8080"
+      - "8080:8080"
     depends_on:
-    - "postgres"
+      - "postgres"
     restart: always
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
@@ -23,6 +23,6 @@ services:
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS512", "key": "-----BEGIN CERTIFICATE-----\nMIIDDTCCAfWgAwIBAgIJPN8HMNQ9aa6+MA0GCSqGSIb3DQEBCwUAMCQxIjAgBgNV\nBAMTGWRldi04OG5saTMyeS5ldS5hdXRoMC5jb20wHhcNMjAxMDE1MTUzNTE4WhcN\nMzQwNjI0MTUzNTE4WjAkMSIwIAYDVQQDExlkZXYtODhubGkzMnkuZXUuYXV0aDAu\nY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsjGxjPzFe7aCSNC5\nXivJ9xFhc0s7YU1qHyoArN5A/Yc7zzwymc1rj/BRkWpwSO05Ur9XeUNw1BtgV6PI\nncUnS95K3Dvk5/T+wTbENaCkWejNZQZJJsPWnRwAFMKxpoM9ucOAwFJelja2uQku\nM+opUyb/eNF+uD5QwZT+5VwjSx+1spyaEbYV3l/zZL+PXCfHbL6z3A9wavbWjMrj\nR0IsU0tbTRwI2JnTHqNWvGlArOWJsS1dR25EbanSYmZZJ8lNd+PG2ubDKJB1tzPT\nUmMa8btdzdSDnXBtFRCiC7I4UaxmcZ4jS55pHwm+J0qB8sNNpV7kMa/hNBLUwzSE\nvuzIJwIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSAxIeQ+8MP\nADZXIcCPTJusX35xSjAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEB\nADjPoJMyVwZWHkjZ2Cg8SZsGGpyj+dgrG3khFKazKamzDKOI/uB0TFD+HZ25XBar\nsOFq050ZEFQAchspZM8601AyqZScSKabOgw2Z9mMZEYCjcgnyp/gP2UNC97AqQqD\n9MRM8LY9VzZ9qmRAToKh3gS+td3JbvEAXk8LQkDE/eZXVBvioETwJcrTP37NNtV3\nxipiTCgfJo0ZIdCluMNZY/Od62SEhAzTJb/ahiKAt7JXA9pDv+fx+3L/oBrmGhZX\nhEHi0zYvjPGaeRl38PxsT0aWhXUFEvVef/h/QdcQ3tkNHixHplwVA+Gt8NuUhPSm\n/z8Dc7MT6gpvEbaH1kDAtNA=\n-----END CERTIFICATE-----"}'
 volumes:
   db_data:
-
